@@ -29,5 +29,7 @@ public class Test {
         System.out.println(vezana);
         vezana.add(3, "New with index position");
         System.out.println(vezana);
+        vezana.set(3, "ERASE THIRD");
+        System.out.println(vezana);
     }
 }
