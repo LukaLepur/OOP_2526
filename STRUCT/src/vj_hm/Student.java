@@ -1,24 +1,15 @@
 package vj_hm;
 
-import java.util.Comparator;
-
-public class Student implements Comparator<Integer> {
+public class Student implements Comparable<Student> {
     private String name;
     private int id;
+    private int age;
     private static int cntID=10;
-    public Student(String name){
+    public Student(String name, int age){
         this.id=cntID++;
+        this.age=age;
         this.name=name;
     }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                '}';
-    }
-
     public String getName() {
         return this.name;
     }
@@ -27,10 +18,29 @@ public class Student implements Comparator<Integer> {
         return this.id;
     }
 
-
+    public int getAge() {
+        return age;
+    }
 
     @Override
-    public int compare(Integer o1, Integer o2) {
-        return o1.compareTo(o2);
+    public String toString() {
+        return "\n" + "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", hash=" + this.hashCode() +
+                ", id=" + id +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Student other) {
+       /* if (this.id>other.id){
+            return 1;
+        } else if (this.id<other.id){
+            return -1;
+        } else{
+            return 0;
+        }*/
+        return Integer.compare(this.id,other.id);
     }
 }

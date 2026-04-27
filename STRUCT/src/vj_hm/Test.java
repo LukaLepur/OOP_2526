@@ -1,58 +1,49 @@
 package vj_hm;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 public class Test {
     public static void main(String[] args) {
-        HashMap<Integer,String> podaci = new HashMap<>();
-        Integer[] ocj={2,3, 4, 5, 5};
-        HashMap<Student, Integer[]> studentiPodaci = new HashMap<>();
-        studentiPodaci.put(new Student("Miro"), ocj);
-        studentiPodaci.put(new Student("Olga"), ocj);
-        studentiPodaci.put(new Student("Mira"), ocj);
-        listMapElements(studentiPodaci);
-        TreeMap<Student, Integer[]> tmStudenti=new TreeMap<>(studentiPodaci);
-        System.out.println(tmStudenti);
-        podaci.put(21, "Stipe");
-        podaci.put(159, "Divna");
-        podaci.put(985, "Etna");
-        podaci.put(455, "Petar");
-        podaci.put(5788, "Vlatka");
-        System.out.println(podaci);
-        listHMElements(podaci);
-        TreeMap<Integer, String> tmPodaci=new TreeMap<>(podaci);
-        System.out.println(tmPodaci);
-        listTMElements(tmPodaci);
+        TreeMap<Student, Integer[]> studenti=new TreeMap<Student, Integer[]>();
+        Student s1=new Student("Lovre", 19);
+        Student s2=new Student("Kristijan", 22);
+        Student s3=new Student("Lucija", 20);
+        Student s4=new Student("Božena", 23);
+        Student s5=new Student("Luka", 25);
+        Student s6=new Student("Iva", 29);
+        studenti.put(s1,new Integer[]{2,3,3,3});
+        studenti.put(s2,new Integer[]{2,4,3,2});
+        studenti.put(s3,new Integer[]{4,4,4,4});
+        studenti.put(s4,new Integer[]{5,4,3,3});
+        studenti.put(s5,new Integer[]{5,4,5,5});
+        studenti.put(s6,new Integer[]{2,2,2,2});
+        System.out.println("\n---------------Studenti---------------");
+        System.out.println(studenti);
+
+        System.out.println("\n---------------Studenti Duljina imena---------------");
+        TreeMap<Student, Integer[]> studentiImena=new TreeMap<>(new NameLengthComparator());
+        studentiImena.putAll(studenti);
+        System.out.println(studentiImena);
+
+        System.out.println("\n---------------Studenti Dob---------------");
+        TreeMap<Student, Integer[]> studentiDob=new TreeMap<>(new AgeComparator());
+        studentiDob.putAll(studenti);
+        System.out.println(studentiDob);
+        System.out.println("\n---------------Studenti Dob(obrnuto)---------------");
+        System.out.println(studentiDob.reversed());
+        System.out.println("\n---------------Studenti HashCode---------------");
+        TreeMap<Student, Integer[]> studentiHash=new TreeMap<>(new HashComparator());
+        studentiHash.putAll(studenti);
+        System.out.println(studentiHash);
+
     }
 
-    private static void listHMElements(HashMap<Integer, String> podaci){
-        Set<Map.Entry<Integer, String>> entries = podaci.entrySet();
-        for (Map.Entry<Integer, String> es:entries){
-            System.out.println(es.getKey()+" - "+es.getValue());
+    private static <K, V> void listAllElements(TreeMap<K,V> tMap){
+        for (Map.Entry<K, V> elem : tMap.entrySet()) {
+            System.out.println("Key: "+elem.getKey());
+            System.out.println("Value: "+elem.getValue());
         }
     }
 
-    private static void listTMElements(TreeMap<Integer, String> tmPodaci){
-        Set<Map.Entry<Integer, String>> entries = tmPodaci.entrySet();
-        for (Map.Entry<Integer, String> es:entries){
-            System.out.println(es.getKey()+" - "+es.getValue());
-        }
-    }
-
-    private static void listMapElementsNew(Map<Student, Integer[]> podaci){
-        Set<Map.Entry<Student, Integer[]>> entries = podaci.entrySet();
-        for (Map.Entry<Student, Integer[]> es:entries){
-            System.out.println(es.getKey()+" - "+es.getValue());
-        }
-    }
-
-    private static <K, V> void listMapElements(Map<K, V> podaci){
-        Set<Map.Entry<K, V>> entries = podaci.entrySet();
-        for (Map.Entry<K, V> es:entries){
-            System.out.println(es.getKey()+" - "+es.getValue());
-        }
-    }
 }
