@@ -9,7 +9,10 @@ public class MainFrame extends JFrame {
 
     private JTextArea textArea;
     private JButton mainBtn;
+    private ToolBar toolBar;
     private JScrollPane txtAreaScroll;
+    private static final String SAVEFILE="SWING_GUI/src/fst_gui/txtDataFile.txt";
+
 
 
     public MainFrame() {
@@ -55,8 +58,15 @@ public class MainFrame extends JFrame {
                 if (eventCommand.equals("RESET")){
                     resetTxtArea();
                 }
+                if (eventCommand.equals("SAVE")){
+                    AUX_IO.saveTXTDataFromArea(getAllTextFromArea(), SAVEFILE);
+                }
+                if (eventCommand.equals("LOAD")){
+                    String data=AUX_IO.LoadTxtDataFromFile(SAVEFILE);
+
+                }
             }
-        })
+        });
     }
 
     private void setText2TextAreas(String txt){
@@ -64,7 +74,11 @@ public class MainFrame extends JFrame {
     }
 
     private void resetTxtArea(){
-        textArea.setText("");
+        textArea.setText(null);
+    }
+
+    private String getAllTextFromArea(){
+        return textArea.getText();
     }
 
 }
